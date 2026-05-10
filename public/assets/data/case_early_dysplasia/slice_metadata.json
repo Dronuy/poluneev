@@ -1,0 +1,29 @@
+{
+  "case_label": "case_early_dysplasia",
+  "sag": {
+    "n_slices": 38,
+    "slice_thickness_mm": 2.0,
+    "pixel_spacing_mm": [
+      0.4375,
+      0.4375
+    ],
+    "original_rows": 320,
+    "original_cols": 320,
+    "series_description": "SAG PD",
+    "render_size": 512
+  },
+  "ax": {
+    "n_slices": 32,
+    "slice_thickness_mm": 3.0,
+    "pixel_spacing_mm": [
+      0.5469,
+      0.5469
+    ],
+    "original_rows": 256,
+    "original_cols": 256,
+    "series_description": "AX T2 FS",
+    "render_size": 512,
+    "laterality_original": "L",
+    "canonicalized": false
+  }
+}

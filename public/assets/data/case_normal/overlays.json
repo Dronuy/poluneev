@@ -1,0 +1,223 @@
+{
+  "case_label": "case_normal",
+  "headline": "Normal",
+  "summary": "Healthy patellofemoral anatomy across all four domains.",
+  "study_id_label": "anonymous (fastMRI public dataset)",
+  "sag": {
+    "best_slice_idx_0based": 22,
+    "n_slices": 32,
+    "landmarks_512px": {
+      "is_patella_top": [
+        141.72,
+        122.49
+      ],
+      "is_patella_bottom": [
+        121.0,
+        269.0
+      ],
+      "is_tibial_tuberosity": [
+        209.1,
+        406.15
+      ],
+      "cd_cd_cartilage_top": [
+        143.43,
+        121.14
+      ],
+      "cd_cd_cartilage_bottom": [
+        147.79,
+        234.91
+      ],
+      "cd_cd_tibial_plateau": [
+        218.11,
+        342.42
+      ],
+      "pti_pti_pc_top": [
+        144.66,
+        122.26
+      ],
+      "pti_pti_pc_bot": [
+        146.08,
+        235.77
+      ],
+      "pti_pti_tc_top": [
+        161.91,
+        180.33
+      ],
+      "pti_pti_tc_bot": [
+        166.45,
+        235.81
+      ]
+    },
+    "indices": {
+      "IS": {
+        "value": 1.102,
+        "category": "Normal"
+      },
+      "CDI": {
+        "value": 1.128,
+        "category": "Normal"
+      },
+      "PTI": {
+        "value": 0.488,
+        "category": "Normal"
+      }
+    }
+  },
+  "ax": {
+    "predicted_slices_0based": {
+      "meas": 20,
+      "lti": 22,
+      "pcl": 20,
+      "tt": 1,
+      "patella": 22
+    },
+    "lti_landmarks_512px": {
+      "LTI_prox": [
+        257.04,
+        120.12
+      ],
+      "LTI_dist": [
+        317.86,
+        99.94
+      ],
+      "LTI_prox_bone": [
+        260.82,
+        129.34
+      ],
+      "LTI_dist_bone": [
+        326.56,
+        103.78
+      ]
+    },
+    "meas_landmarks_512px": {
+      "Med_facet": [
+        219.44,
+        116.86
+      ],
+      "Lat_facet": [
+        312.96,
+        98.7
+      ],
+      "Sulcus": [
+        255.74,
+        125.06
+      ],
+      "Med_bone": [
+        212.42,
+        117.7
+      ],
+      "Lat_bone": [
+        322.04,
+        102.36
+      ],
+      "Sulcus_bone": [
+        257.28,
+        142.82
+      ]
+    },
+    "pcl_landmarks_512px": {
+      "PCL_med": [
+        169.84,
+        344.06
+      ],
+      "PCL_lat": [
+        353.94,
+        335.6
+      ]
+    },
+    "patella_landmarks_512px": {
+      "Patella_med_edge": [
+        190.76,
+        68.84
+      ],
+      "Patella_lat_edge": [
+        345.84,
+        94.82
+      ]
+    },
+    "tt_landmarks_512px": {
+      "TT_anterior": [
+        303.58,
+        160.78
+      ]
+    },
+    "indices": {
+      "Cart_SA": {
+        "value": 142.527,
+        "verdict": "Normal",
+        "cutoff": 154.0,
+        "op": "ge",
+        "reference": "Tanaka 2023"
+      },
+      "Cart_LTI": {
+        "value": 15.726,
+        "verdict": "Normal",
+        "cutoff": 13.0,
+        "op": "le",
+        "reference": "Tanaka 2023"
+      },
+      "Cart_TD": {
+        "value": 4.59,
+        "verdict": "Normal",
+        "cutoff": 3.0,
+        "op": "le",
+        "reference": "Tanaka 2023"
+      },
+      "Bone_SA": {
+        "value": 118.765,
+        "verdict": "Normal",
+        "cutoff": 145.0,
+        "op": "ge",
+        "reference": "Pfirrmann 2000"
+      },
+      "Bone_LTI": {
+        "value": 18.621,
+        "verdict": "Normal",
+        "cutoff": 11.0,
+        "op": "le",
+        "reference": "Carrillon 2000"
+      },
+      "Bone_TD": {
+        "value": 8.83,
+        "verdict": "Normal",
+        "cutoff": 3.0,
+        "op": "le",
+        "reference": "Pfirrmann 2000"
+      },
+      "Bone_TFA": {
+        "value": 0.327,
+        "verdict": "Borderline",
+        "cutoff": 0.6,
+        "op": "ge",
+        "reference": "Pfirrmann 2000"
+      },
+      "Patellar_Tilt": {
+        "value": 12.14,
+        "verdict": "Normal",
+        "cutoff": 20.0,
+        "op": "ge",
+        "reference": "Sallay 1996"
+      },
+      "PT_TG_cart": {
+        "value": 12.62,
+        "verdict": "Normal",
+        "cutoff": 15.5,
+        "op": "ge",
+        "reference": "Hinckel 2015"
+      }
+    },
+    "internal": {
+      "Cart_TFA": {
+        "value": 0.409,
+        "note": "Internal cart-vs-bone consistency check; not primary screening."
+      },
+      "sPT_TG_cart": {
+        "value": -10.36,
+        "note": "Signed AP-axis check; pending convention review."
+      }
+    }
+  },
+  "composite_phenotype": "Normal",
+  "discordance_flags": [],
+  "recommendation": "No PFI features identified. No specific imaging follow-up indicated."
+}

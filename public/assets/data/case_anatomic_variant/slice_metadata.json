@@ -1,0 +1,29 @@
+{
+  "case_label": "case_anatomic_variant",
+  "sag": {
+    "n_slices": 29,
+    "slice_thickness_mm": 4.0,
+    "pixel_spacing_mm": [
+      0.3125,
+      0.3125
+    ],
+    "original_rows": 512,
+    "original_cols": 512,
+    "series_description": "PD FS SAG",
+    "render_size": 512
+  },
+  "ax": {
+    "n_slices": 34,
+    "slice_thickness_mm": 4.5,
+    "pixel_spacing_mm": [
+      0.625,
+      0.625
+    ],
+    "original_rows": 256,
+    "original_cols": 256,
+    "series_description": "PD AXIAL FAT SAT",
+    "render_size": 512,
+    "laterality_original": "R",
+    "canonicalized": true
+  }
+}

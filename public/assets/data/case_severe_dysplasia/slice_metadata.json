@@ -1,0 +1,29 @@
+{
+  "case_label": "case_severe_dysplasia",
+  "sag": {
+    "n_slices": 36,
+    "slice_thickness_mm": 3.0,
+    "pixel_spacing_mm": [
+      0.293,
+      0.293
+    ],
+    "original_rows": 512,
+    "original_cols": 512,
+    "series_description": "RtSagPD",
+    "render_size": 512
+  },
+  "ax": {
+    "n_slices": 36,
+    "slice_thickness_mm": 3.0,
+    "pixel_spacing_mm": [
+      0.293,
+      0.293
+    ],
+    "original_rows": 512,
+    "original_cols": 512,
+    "series_description": "RtAxT2ftst",
+    "render_size": 512,
+    "laterality_original": "R",
+    "canonicalized": true
+  }
+}

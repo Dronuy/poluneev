@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live demo &mdash; Poluneev PFI Engine</title>
+<meta name="description" content="Try the Poluneev PFI Engine: 5 sample knee MRI cases or upload your own DICOM. Fully automated patellofemoral instability analysis.">
+<meta name="theme-color" content="#0D9488">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/shared.css">
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/demo.css">
+</head>
+<body>
+
+<!-- ================ NAV ================ -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="/"><strong>Poluneev</strong></a>
+    <button class="nav-burger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#capabilities">Capabilities</a></li>
+      <li><a href="/#founder">Founder</a></li>
+      <li><a href="/#contact">Contact</a></li>
+      <li><a class="btn btn-ghost" href="/">&larr; Home</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ================ DEMO HEADER ================ -->
+<section class="demo-band">
+  <div class="wrap">
+    <h1>PFI Engine &mdash; live demo</h1>
+    <p>
+      Click any of the five sample cases below to walk through a finished
+      analysis, or drop your own DICOM study to run the full pipeline live.
+    </p>
+    <div class="banner banner-warn demo-banner">
+      <strong>Research preview.</strong> Not for clinical diagnosis.
+      Uploaded files are PHI-stripped, processed in memory, and deleted
+      within 5 minutes. See <a href="/privacy">privacy</a> and
+      <a href="/terms">terms</a>.
+    </div>
+  </div>
+</section>
+
+<!-- ================ UPLOAD ================ -->
+<section class="upload-section">
+  <div class="wrap">
+    <div class="upload-zone" id="upload-zone" tabindex="0" role="button" aria-label="Upload DICOM ZIP">
+      <div class="ic">&uarr;</div>
+      <h3>Upload your own DICOM study</h3>
+      <p>Drop a ZIP archive here, or click to browse.</p>
+      <a class="btn btn-primary" id="upload-pick">Choose ZIP</a>
+      <input type="file" id="upload-file" accept=".zip,application/zip">
+      <p class="accepts">
+        Accepts: ZIP archive of a DICOM study with sagittal + axial MR knee series.
+        Max 500 MB. Per-IP rate limit: 5/hour, 20/day.
+      </p>
+    </div>
+    <div class="upload-progress" id="upload-progress">
+      <div class="label" id="upload-status">Validating&hellip;</div>
+      <div class="bar"><div class="fill" id="upload-fill"></div></div>
+      <div class="meta" id="upload-meta"></div>
+    </div>
+    <div class="upload-error" id="upload-error">
+      <div class="banner banner-warn">
+        <strong>Upload failed.</strong>
+        <span id="upload-error-text">&mdash;</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ SAMPLE CASES ================ -->
+<section class="cases-section">
+  <div class="wrap">
+    <h2>Sample cases</h2>
+    <div id="cases" role="list"></div>
+  </div>
+</section>
+
+<!-- ================ VIEWERS ================ -->
+<section class="viewer-area">
+  <div class="wrap">
+    <div class="viewer-row">
+      <div class="viewer-panel" id="sag-panel">
+        <div class="viewer-header">
+          <span class="vlbl">SAG &middot; Patellar Height</span>
+        </div>
+        <div class="viewer-canvas" id="sag-canvas">
+          <img class="slice-img" id="sag-img" alt="">
+          <svg class="overlay" id="sag-svg" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet"></svg>
+          <div class="panel-tag">SAG</div>
+          <div class="slice-counter" id="sag-counter">&mdash;</div>
+          <div class="best-slice-marker" id="sag-best-marker"></div>
+        </div>
+        <div class="viewer-scrubber">
+          <button onclick="scrubSlice('sag', -1)">&larr;</button>
+          <input type="range" id="sag-range" min="1" max="1" step="1" value="1"
+                 oninput="setSlice('sag', this.value)">
+          <span class="idx" id="sag-idx">&mdash; / &mdash;</span>
+          <button onclick="scrubSlice('sag', +1)">&rarr;</button>
+        </div>
+      </div>
+
+      <div class="viewer-panel" id="ax-panel">
+        <div class="viewer-header">
+          <span class="vlbl">AX &middot; Trochlear / Tilt / Lateralization</span>
+          <span class="ax-jumps" id="ax-jumps"></span>
+        </div>
+        <div class="viewer-canvas" id="ax-canvas">
+          <img class="slice-img" id="ax-img" alt="">
+          <svg class="overlay" id="ax-svg" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet"></svg>
+          <div class="panel-tag">AX</div>
+          <div class="slice-counter" id="ax-counter">&mdash;</div>
+          <div class="best-slice-marker" id="ax-best-marker"></div>
+        </div>
+        <div class="viewer-scrubber">
+          <button onclick="scrubSlice('ax', -1)">&larr;</button>
+          <input type="range" id="ax-range" min="1" max="1" step="1" value="1"
+                 oninput="setSlice('ax', this.value)">
+          <span class="idx" id="ax-idx">&mdash; / &mdash;</span>
+          <button onclick="scrubSlice('ax', +1)">&rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="analyze-row">
+      <button class="analyze-btn" id="analyze-btn" onclick="runAnalyze()" disabled>ANALYZE</button>
+    </div>
+
+    <div id="results"></div>
+  </div>
+</section>
+
+<!-- ================ MODAL (text report) ================ -->
+<div id="modal-bg" onclick="closeModal(event)">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Text report</h3>
+      <span class="close" onclick="closeModal()">&times;</span>
+    </div>
+    <div class="modal-body"><pre id="report-text"></pre></div>
+    <div class="modal-footer">
+      <button class="btn-secondary" id="copy-btn" onclick="copyReport()">Copy to clipboard</button>
+      <button class="btn-secondary" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================ FOOTER ================ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <p><strong>Poluneev</strong></p>
+        <p>AI radiology &mdash; preliminary reads, signed by you.</p>
+        <p>Chicago, IL, USA</p>
+        <p>&copy; 2026 Poluneev. Research use only. Not a medical device.</p>
+      </div>
+      <div>
+        <p><strong>Product</strong></p>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/demo">Live Demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <p><strong>Legal</strong></p>
+        <ul>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="mailto:contact@poluneev.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JSZip from CDN — used by api.js when user drops a folder. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/api.js"></script>
+<script src="/assets/js/viewer.js"></script>
+<script src="/assets/js/overlays.js"></script>
+<script src="/assets/js/demo.js"></script>
+</body>
+</html>

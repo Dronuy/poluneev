@@ -1,0 +1,223 @@
+{
+  "case_label": "case_severe_dysplasia",
+  "headline": "Severe PFI",
+  "summary": "Multi-domain PFI: alta + trochlear dysplasia + tilt + lateralization.",
+  "study_id_label": "anonymous (fastMRI public dataset)",
+  "sag": {
+    "best_slice_idx_0based": 9,
+    "n_slices": 36,
+    "landmarks_512px": {
+      "is_patella_top": [
+        143.88,
+        106.24
+      ],
+      "is_patella_bottom": [
+        101.44,
+        248.24
+      ],
+      "is_tibial_tuberosity": [
+        174.92,
+        431.26
+      ],
+      "cd_cd_cartilage_top": [
+        147.26,
+        104.33
+      ],
+      "cd_cd_cartilage_bottom": [
+        139.54,
+        231.14
+      ],
+      "cd_cd_tibial_plateau": [
+        194.22,
+        372.9
+      ],
+      "pti_pti_pc_top": [
+        148.61,
+        105.76
+      ],
+      "pti_pti_pc_bot": [
+        136.35,
+        232.38
+      ],
+      "pti_pti_tc_top": [
+        145.91,
+        216.91
+      ],
+      "pti_pti_tc_bot": [
+        148.96,
+        286.62
+      ]
+    },
+    "indices": {
+      "IS": {
+        "value": 1.331,
+        "category": "Alta"
+      },
+      "CDI": {
+        "value": 1.196,
+        "category": "Normal"
+      },
+      "PTI": {
+        "value": 0.122,
+        "category": "Alta"
+      }
+    }
+  },
+  "ax": {
+    "predicted_slices_0based": {
+      "meas": 19,
+      "lti": 20,
+      "pcl": 19,
+      "tt": 0,
+      "patella": 26
+    },
+    "lti_landmarks_512px": {
+      "LTI_prox": [
+        248.08,
+        132.82
+      ],
+      "LTI_dist": [
+        331.82,
+        110.2
+      ],
+      "LTI_prox_bone": [
+        251.48,
+        143.1
+      ],
+      "LTI_dist_bone": [
+        332.08,
+        118.6
+      ]
+    },
+    "meas_landmarks_512px": {
+      "Med_facet": [
+        207.02,
+        136.38
+      ],
+      "Lat_facet": [
+        324.7,
+        113.52
+      ],
+      "Sulcus": [
+        237.42,
+        135.78
+      ],
+      "Med_bone": [
+        204.02,
+        141.06
+      ],
+      "Lat_bone": [
+        334.58,
+        120.82
+      ],
+      "Sulcus_bone": [
+        233.46,
+        148.8
+      ]
+    },
+    "pcl_landmarks_512px": {
+      "PCL_med": [
+        156.64,
+        354.28
+      ],
+      "PCL_lat": [
+        324.66,
+        352.7
+      ]
+    },
+    "patella_landmarks_512px": {
+      "Patella_med_edge": [
+        255.32,
+        51.26
+      ],
+      "Patella_lat_edge": [
+        383.5,
+        134.6
+      ]
+    },
+    "tt_landmarks_512px": {
+      "TT_anterior": [
+        314.22,
+        128.28
+      ]
+    },
+    "indices": {
+      "Cart_SA": {
+        "value": 166.824,
+        "verdict": "Abnormal",
+        "cutoff": 154.0,
+        "op": "ge",
+        "reference": "Tanaka 2023"
+      },
+      "Cart_LTI": {
+        "value": 14.59,
+        "verdict": "Borderline",
+        "cutoff": 13.0,
+        "op": "le",
+        "reference": "Tanaka 2023"
+      },
+      "Cart_TD": {
+        "value": 3.095,
+        "verdict": "Borderline",
+        "cutoff": 3.0,
+        "op": "le",
+        "reference": "Tanaka 2023"
+      },
+      "Bone_SA": {
+        "value": 149.808,
+        "verdict": "Abnormal",
+        "cutoff": 145.0,
+        "op": "ge",
+        "reference": "Pfirrmann 2000"
+      },
+      "Bone_LTI": {
+        "value": 16.376,
+        "verdict": "Normal",
+        "cutoff": 11.0,
+        "op": "le",
+        "reference": "Carrillon 2000"
+      },
+      "Bone_TD": {
+        "value": 5.135,
+        "verdict": "Normal",
+        "cutoff": 3.0,
+        "op": "le",
+        "reference": "Pfirrmann 2000"
+      },
+      "Bone_TFA": {
+        "value": 0.71,
+        "verdict": "Abnormal",
+        "cutoff": 0.6,
+        "op": "ge",
+        "reference": "Pfirrmann 2000"
+      },
+      "Patellar_Tilt": {
+        "value": 33.57,
+        "verdict": "Tilted",
+        "cutoff": 20.0,
+        "op": "ge",
+        "reference": "Sallay 1996"
+      },
+      "PT_TG_cart": {
+        "value": 22.53,
+        "verdict": "Lateralized",
+        "cutoff": 15.5,
+        "op": "ge",
+        "reference": "Hinckel 2015"
+      }
+    },
+    "internal": {
+      "Cart_TFA": {
+        "value": 0.662,
+        "note": "Internal cart-vs-bone consistency check; not primary screening."
+      },
+      "sPT_TG_cart": {
+        "value": 1.99,
+        "note": "Signed AP-axis check; pending convention review."
+      }
+    }
+  },
+  "composite_phenotype": "Severe",
+  "discordance_flags": [],
+  "recommendation": "Severe PFI features across multiple domains. MSK fellowship referral and surgical workup consideration."
+}

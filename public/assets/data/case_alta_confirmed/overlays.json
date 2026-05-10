@@ -1,0 +1,229 @@
+{
+  "case_label": "case_alta_confirmed",
+  "headline": "Severe Alta",
+  "summary": "Patella alta confirmed across all three patellar-height indices.",
+  "study_id_label": "anonymous (fastMRI public dataset)",
+  "sag": {
+    "best_slice_idx_0based": 10,
+    "n_slices": 26,
+    "landmarks_512px": {
+      "is_patella_top": [
+        121.26,
+        76.93
+      ],
+      "is_patella_bottom": [
+        79.19,
+        211.8
+      ],
+      "is_tibial_tuberosity": [
+        136.57,
+        411.46
+      ],
+      "cd_cd_cartilage_top": [
+        118.87,
+        80.26
+      ],
+      "cd_cd_cartilage_bottom": [
+        111.34,
+        188.02
+      ],
+      "cd_cd_tibial_plateau": [
+        156.52,
+        346.7
+      ],
+      "pti_pti_pc_top": [
+        122.88,
+        77.31
+      ],
+      "pti_pti_pc_bot": [
+        106.47,
+        205.77
+      ],
+      "pti_pti_tc_top": [
+        121.21,
+        195.71
+      ],
+      "pti_pti_tc_bot": [
+        118.53,
+        252.27
+      ]
+    },
+    "indices": {
+      "IS": {
+        "value": 1.47,
+        "category": "Alta"
+      },
+      "CDI": {
+        "value": 1.527,
+        "category": "Alta"
+      },
+      "PTI": {
+        "value": 0.078,
+        "category": "Alta"
+      }
+    }
+  },
+  "ax": {
+    "predicted_slices_0based": {
+      "meas": 16,
+      "lti": 20,
+      "pcl": 16,
+      "tt": 0,
+      "patella": 26
+    },
+    "lti_landmarks_512px": {
+      "LTI_prox": [
+        271.34,
+        128.54
+      ],
+      "LTI_dist": [
+        336.84,
+        115.98
+      ],
+      "LTI_prox_bone": [
+        275.68,
+        139.58
+      ],
+      "LTI_dist_bone": [
+        336.86,
+        122.2
+      ]
+    },
+    "meas_landmarks_512px": {
+      "Med_facet": [
+        232.36,
+        117.12
+      ],
+      "Lat_facet": [
+        324.44,
+        110.6
+      ],
+      "Sulcus": [
+        264.54,
+        128.1
+      ],
+      "Med_bone": [
+        222.04,
+        118.18
+      ],
+      "Lat_bone": [
+        343.82,
+        116.42
+      ],
+      "Sulcus_bone": [
+        264.52,
+        142.18
+      ]
+    },
+    "pcl_landmarks_512px": {
+      "PCL_med": [
+        170.28,
+        314.2
+      ],
+      "PCL_lat": [
+        347.12,
+        320.04
+      ]
+    },
+    "patella_landmarks_512px": {
+      "Patella_med_edge": [
+        240.52,
+        83.48
+      ],
+      "Patella_lat_edge": [
+        373.28,
+        120.72
+      ]
+    },
+    "tt_landmarks_512px": {
+      "TT_anterior": [
+        319.54,
+        139.16
+      ]
+    },
+    "indices": {
+      "Cart_SA": {
+        "value": 144.877,
+        "verdict": "Normal",
+        "cutoff": 154.0,
+        "op": "ge",
+        "reference": "Tanaka 2023"
+      },
+      "Cart_LTI": {
+        "value": 12.754,
+        "verdict": "Abnormal",
+        "cutoff": 13.0,
+        "op": "le",
+        "reference": "Tanaka 2023"
+      },
+      "Cart_TD": {
+        "value": 4.59,
+        "verdict": "Normal",
+        "cutoff": 3.0,
+        "op": "le",
+        "reference": "Tanaka 2023"
+      },
+      "Bone_SA": {
+        "value": 132.543,
+        "verdict": "Normal",
+        "cutoff": 145.0,
+        "op": "ge",
+        "reference": "Pfirrmann 2000"
+      },
+      "Bone_LTI": {
+        "value": 17.746,
+        "verdict": "Normal",
+        "cutoff": 11.0,
+        "op": "le",
+        "reference": "Carrillon 2000"
+      },
+      "Bone_TD": {
+        "value": 7.959,
+        "verdict": "Normal",
+        "cutoff": 3.0,
+        "op": "le",
+        "reference": "Pfirrmann 2000"
+      },
+      "Bone_TFA": {
+        "value": 0.415,
+        "verdict": "Borderline",
+        "cutoff": 0.6,
+        "op": "ge",
+        "reference": "Pfirrmann 2000"
+      },
+      "Patellar_Tilt": {
+        "value": 13.78,
+        "verdict": "Normal",
+        "cutoff": 20.0,
+        "op": "ge",
+        "reference": "Sallay 1996"
+      },
+      "PT_TG_cart": {
+        "value": 17.3,
+        "verdict": "Lateralized",
+        "cutoff": 15.5,
+        "op": "ge",
+        "reference": "Hinckel 2015"
+      }
+    },
+    "internal": {
+      "Cart_TFA": {
+        "value": 0.455,
+        "note": "Internal cart-vs-bone consistency check; not primary screening."
+      },
+      "sPT_TG_cart": {
+        "value": -2.89,
+        "note": "Signed AP-axis check; pending convention review."
+      }
+    }
+  },
+  "composite_phenotype": "Severe",
+  "discordance_flags": [
+    {
+      "id": "early_dysplasia",
+      "title": "Cart-bone discordance — early dysplasia pattern",
+      "text": "Cartilaginous trochlea shows dysplasia features (flat or shallow groove on cartilage), but underlying bone is normal. This pattern is described in early or cartilaginous dysplasia and may warrant MSK fellowship review."
+    }
+  ],
+  "recommendation": "Severe PFI features across multiple domains. MSK fellowship referral and surgical workup consideration. MSK fellowship review recommended (early/cartilaginous dysplasia pattern)."
+}

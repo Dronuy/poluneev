@@ -1,0 +1,229 @@
+{
+  "case_label": "case_anatomic_variant",
+  "headline": "Anatomic variant",
+  "summary": "Long non-articular patellar pole inflates IS index; CDI and PTI normal.",
+  "study_id_label": "anonymous (fastMRI public dataset)",
+  "sag": {
+    "best_slice_idx_0based": 15,
+    "n_slices": 29,
+    "landmarks_512px": {
+      "is_patella_top": [
+        116.81,
+        106.89
+      ],
+      "is_patella_bottom": [
+        88.18,
+        227.91
+      ],
+      "is_tibial_tuberosity": [
+        154.74,
+        385.84
+      ],
+      "cd_cd_cartilage_top": [
+        116.16,
+        106.19
+      ],
+      "cd_cd_cartilage_bottom": [
+        116.68,
+        212.82
+      ],
+      "cd_cd_tibial_plateau": [
+        177.09,
+        320.16
+      ],
+      "pti_pti_pc_top": [
+        117.33,
+        107.43
+      ],
+      "pti_pti_pc_bot": [
+        116.35,
+        215.26
+      ],
+      "pti_pti_tc_top": [
+        130.65,
+        186.23
+      ],
+      "pti_pti_tc_bot": [
+        133.81,
+        233.7
+      ]
+    },
+    "indices": {
+      "IS": {
+        "value": 1.378,
+        "category": "Alta"
+      },
+      "CDI": {
+        "value": 1.155,
+        "category": "Normal"
+      },
+      "PTI": {
+        "value": 0.269,
+        "category": "Normal"
+      }
+    }
+  },
+  "ax": {
+    "predicted_slices_0based": {
+      "meas": 18,
+      "lti": 19,
+      "pcl": 17,
+      "tt": 4,
+      "patella": 23
+    },
+    "lti_landmarks_512px": {
+      "LTI_prox": [
+        299.94,
+        126.98
+      ],
+      "LTI_dist": [
+        374.48,
+        135.24
+      ],
+      "LTI_prox_bone": [
+        299.38,
+        135.5
+      ],
+      "LTI_dist_bone": [
+        378.0,
+        140.9
+      ]
+    },
+    "meas_landmarks_512px": {
+      "Med_facet": [
+        272.6,
+        110.94
+      ],
+      "Lat_facet": [
+        376.22,
+        131.08
+      ],
+      "Sulcus": [
+        300.82,
+        127.34
+      ],
+      "Med_bone": [
+        262.58,
+        110.44
+      ],
+      "Lat_bone": [
+        380.82,
+        141.36
+      ],
+      "Sulcus_bone": [
+        296.42,
+        137.48
+      ]
+    },
+    "pcl_landmarks_512px": {
+      "PCL_med": [
+        149.36,
+        263.56
+      ],
+      "PCL_lat": [
+        311.22,
+        334.36
+      ]
+    },
+    "patella_landmarks_512px": {
+      "Patella_med_edge": [
+        291.72,
+        60.02
+      ],
+      "Patella_lat_edge": [
+        400.54,
+        128.4
+      ]
+    },
+    "tt_landmarks_512px": {
+      "TT_anterior": [
+        335.28,
+        159.38
+      ]
+    },
+    "indices": {
+      "Cart_SA": {
+        "value": 152.673,
+        "verdict": "Borderline",
+        "cutoff": 154.0,
+        "op": "ge",
+        "reference": "Tanaka 2023"
+      },
+      "Cart_LTI": {
+        "value": 17.311,
+        "verdict": "Normal",
+        "cutoff": 13.0,
+        "op": "le",
+        "reference": "Tanaka 2023"
+      },
+      "Cart_TD": {
+        "value": 4.768,
+        "verdict": "Normal",
+        "cutoff": 3.0,
+        "op": "le",
+        "reference": "Tanaka 2023"
+      },
+      "Bone_SA": {
+        "value": 143.976,
+        "verdict": "Borderline",
+        "cutoff": 145.0,
+        "op": "ge",
+        "reference": "Pfirrmann 2000"
+      },
+      "Bone_LTI": {
+        "value": 19.706,
+        "verdict": "Normal",
+        "cutoff": 11.0,
+        "op": "le",
+        "reference": "Carrillon 2000"
+      },
+      "Bone_TD": {
+        "value": 6.487,
+        "verdict": "Normal",
+        "cutoff": 3.0,
+        "op": "le",
+        "reference": "Pfirrmann 2000"
+      },
+      "Bone_TFA": {
+        "value": 0.487,
+        "verdict": "Borderline",
+        "cutoff": 0.6,
+        "op": "ge",
+        "reference": "Pfirrmann 2000"
+      },
+      "Patellar_Tilt": {
+        "value": 8.51,
+        "verdict": "Normal",
+        "cutoff": 20.0,
+        "op": "ge",
+        "reference": "Sallay 1996"
+      },
+      "PT_TG_cart": {
+        "value": 13.88,
+        "verdict": "Normal",
+        "cutoff": 15.5,
+        "op": "ge",
+        "reference": "Hinckel 2015"
+      }
+    },
+    "internal": {
+      "Cart_TFA": {
+        "value": 0.568,
+        "note": "Internal cart-vs-bone consistency check; not primary screening."
+      },
+      "sPT_TG_cart": {
+        "value": -4.85,
+        "note": "Signed AP-axis check; pending convention review."
+      }
+    }
+  },
+  "composite_phenotype": "Normal",
+  "discordance_flags": [
+    {
+      "id": "is_only_alta_anatomic_variant",
+      "title": "IS-only alta — anatomic variant suspected",
+      "text": "IS index suggests patella alta, but Caton-Deschamps and Patellotrochlear indices are normal. The patellar inferior pole has a long non-articular distal extension in this patient, inflating the IS measurement. CDI and PTI better reflect functional patellar height in this anatomy."
+    }
+  ],
+  "recommendation": "No PFI features identified. No specific imaging follow-up indicated. IS index inflated by anatomic variant; CDI + PTI better reflect functional patellar height."
+}

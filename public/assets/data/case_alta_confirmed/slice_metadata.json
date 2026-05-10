@@ -1,0 +1,29 @@
+{
+  "case_label": "case_alta_confirmed",
+  "sag": {
+    "n_slices": 26,
+    "slice_thickness_mm": 3.5,
+    "pixel_spacing_mm": [
+      0.3125,
+      0.3125
+    ],
+    "original_rows": 512,
+    "original_cols": 512,
+    "series_description": "SAG T2 FS",
+    "render_size": 512
+  },
+  "ax": {
+    "n_slices": 34,
+    "slice_thickness_mm": 3.0,
+    "pixel_spacing_mm": [
+      0.3125,
+      0.3125
+    ],
+    "original_rows": 512,
+    "original_cols": 512,
+    "series_description": "AX T2 FS",
+    "render_size": 512,
+    "laterality_original": "R",
+    "canonicalized": true
+  }
+}
