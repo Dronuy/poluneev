@@ -88,8 +88,50 @@
   </div>
 </section>
 
+<!-- ================ ROADMAP ================ -->
+<section id="roadmap" class="section section-soft">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Roadmap</h2>
+      <p>Building the full musculoskeletal AI radiology stack.</p>
+    </div>
+    <ol class="roadmap" role="list">
+      <li class="rm-stage rm-live">
+        <div class="rm-icon" aria-hidden="true">&#10003;</div>
+        <div class="rm-name">PFI Engine</div>
+        <div class="rm-sub">Knee MRI &mdash; patellofemoral instability</div>
+        <div class="rm-status">Live</div>
+      </li>
+      <li class="rm-stage rm-dev">
+        <div class="rm-icon" aria-hidden="true"><span class="rm-dot"></span></div>
+        <div class="rm-name">Ligaments + Menisci</div>
+        <div class="rm-sub">Knee MRI &mdash; soft tissue injury detection</div>
+        <div class="rm-status">In development</div>
+      </li>
+      <li class="rm-stage rm-planned">
+        <div class="rm-icon" aria-hidden="true"><span class="rm-ring"></span></div>
+        <div class="rm-name">Bone Pathology</div>
+        <div class="rm-sub">Fractures, bone marrow edema</div>
+        <div class="rm-status">Planned</div>
+      </li>
+      <li class="rm-stage rm-planned">
+        <div class="rm-icon" aria-hidden="true"><span class="rm-ring"></span></div>
+        <div class="rm-name">Effusion Analysis</div>
+        <div class="rm-sub">Joint effusion, bursitis</div>
+        <div class="rm-status">Planned</div>
+      </li>
+      <li class="rm-stage rm-planned">
+        <div class="rm-icon" aria-hidden="true"><span class="rm-ring"></span></div>
+        <div class="rm-name">Soft Tissue Pathology</div>
+        <div class="rm-sub">Tendinopathy, muscle injuries, cysts</div>
+        <div class="rm-status">Planned</div>
+      </li>
+    </ol>
+  </div>
+</section>
+
 <!-- ================ CAPABILITIES ================ -->
-<section id="capabilities" class="section section-soft">
+<section id="capabilities" class="section">
   <div class="wrap">
     <div class="section-head">
       <h2>What the PFI Engine does</h2>
@@ -128,6 +170,69 @@
           2000, Sallay 1996, Hinckel 2017. No black-box scores.
         </p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ PFI ENGINE — extended ================ -->
+<section id="pfi-engine" class="section section-soft">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>First module &mdash; PFI Engine</h2>
+      <p>
+        Fully automated knee MRI analysis for patellofemoral instability.
+      </p>
+    </div>
+
+    <p class="pfi-intro">
+      The system computes 14 quantitative indices across four anatomical
+      domains: patellar height, trochlear morphology, lateralization, and
+      patellar tilt.
+    </p>
+
+    <div class="pfi-domains">
+      <div class="pfi-domain">
+        <div class="pfi-letter">A</div>
+        <h3>Patellar Height</h3>
+        <ul>
+          <li>Insall-Salvati Index</li>
+          <li>Caton-Deschamps Index</li>
+          <li>Patellotrochlear Index</li>
+        </ul>
+      </div>
+      <div class="pfi-domain">
+        <div class="pfi-letter">B</div>
+        <h3>Trochlear Morphology</h3>
+        <ul>
+          <li>Sulcus Angle (cart + bone)</li>
+          <li>Trochlear Depth (cart + bone)</li>
+          <li>Lateral Trochlear Inclination (cart + bone)</li>
+          <li>Trochlear Facet Asymmetry (bone)</li>
+        </ul>
+      </div>
+      <div class="pfi-domain">
+        <div class="pfi-letter">C</div>
+        <h3>Lateralization</h3>
+        <ul>
+          <li>TT-TG Distance (cartilage convention)</li>
+        </ul>
+      </div>
+      <div class="pfi-domain">
+        <div class="pfi-letter">D</div>
+        <h3>Patellar Tilt</h3>
+        <ul>
+          <li>Patellar Tilt Angle</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="pfi-cta-text">
+      Try the PFI Engine with your own DICOM study. Your data is processed
+      temporarily and never stored. You receive a structured clinical
+      output ready for review.
+    </p>
+    <div class="pfi-cta">
+      <a class="btn btn-primary" href="/demo">Try Live Demo &rarr;</a>
     </div>
   </div>
 </section>
