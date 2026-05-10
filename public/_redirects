@@ -1,11 +1,13 @@
 # Cloudflare Pages redirects file.
 # Format: <from>  <to>  <status_code>
 # https://developers.cloudflare.com/pages/configuration/redirects/
-
-# Pretty URLs without .html extension
-/demo            /demo.html         200
-/privacy         /privacy.html      200
-/terms           /terms.html        200
+#
+# Pretty URLs (/demo, /privacy, /terms) are handled NATIVELY by Cloudflare
+# Pages — when /demo is requested, it auto-resolves to demo.html, and
+# /demo.html is auto-redirected to /demo (.html stripping). Adding our own
+# rewrite rules here was creating a redirect loop with that built-in
+# behaviour, so the only entries below are real redirects (3xx) for
+# legacy paths.
 
 # Drop the legacy github.io demo path if anything still hits it
 /pfi-engine      /demo              301
