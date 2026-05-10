@@ -22,7 +22,7 @@
   // The frontend silently no-ops if the URL is left as the placeholder,
   // showing the user a 'configuration pending' message instead of a
   // network error.
-  const SUBSCRIBE_URL = "https://subscribe.poluneev.com";
+  const SUBSCRIBE_URL = "https://poluneev-subscribe.andrei-poluneev.workers.dev";
   const CONFIGURED = !/<not-yet-deployed>/.test(SUBSCRIBE_URL);
 
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
