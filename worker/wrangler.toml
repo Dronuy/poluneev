@@ -7,8 +7,8 @@ compatibility_date = "2025-01-01"
 # `preview_id` for `wrangler dev`.
 [[kv_namespaces]]
 binding     = "SUBSCRIBERS"
-id          = "REPLACE_WITH_KV_NAMESPACE_ID"
-preview_id  = "REPLACE_WITH_KV_NAMESPACE_ID"
+id          = "02d9c17289974df58c8cbd1008bc0342"
+preview_id  = "ca4918510665402c9921db82cdcfa73d"
 
 # Same KV namespace doubles as the in-process rate-limit store
 # (keys: rl:<ip-hash>:<bucket>, value: count, TTL = 1 hour).

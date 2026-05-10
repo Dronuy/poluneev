@@ -20,3 +20,6 @@ dist/
 # Local dev servers
 .python-cache/
 __pycache__/
+
+# Cloudflare Wrangler local state/cache
+.wrangler/
