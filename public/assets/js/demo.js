@@ -474,9 +474,10 @@
     const r = document.getElementById("results");
     const banner =
       '<div class="banner banner-info" style="margin-bottom:14px;">' +
-      '<strong>Live upload.</strong> Single measurement slice per panel — ' +
-      'the slices the AI used to compute the indices below. ' +
-      'Sample cases include full series for browsing.' +
+      '<strong>Live upload.</strong> Measurement slices with AI annotations ' +
+      'shown — each panel shows the slice the AI used and the landmarks it ' +
+      'placed to compute the indices below. Sample cases include full ' +
+      'series for browsing.' +
       '</div>';
     window.PoluneevOverlays.showResults(adapted);
     r.insertAdjacentHTML("afterbegin", banner);
