@@ -52,15 +52,16 @@
 <!-- ================ UPLOAD ================ -->
 <section class="upload-section">
   <div class="wrap">
-    <div class="upload-zone" id="upload-zone" tabindex="0" role="button" aria-label="Upload DICOM ZIP">
+    <div class="upload-zone" id="upload-zone" tabindex="0" role="button" aria-label="Upload DICOM study">
       <div class="ic">&uarr;</div>
       <h3>Upload your own DICOM study</h3>
-      <p>Drop a ZIP archive here, or click to browse.</p>
+      <p>Drop a DICOM <strong>folder</strong> or a <strong>ZIP</strong> file here, or click to browse.</p>
       <a class="btn btn-primary" id="upload-pick">Choose ZIP</a>
       <input type="file" id="upload-file" accept=".zip,application/zip">
       <p class="accepts">
-        Accepts: ZIP archive of a DICOM study with sagittal + axial MR knee series.
-        Max 500 MB. Per-IP rate limit: 5/hour, 20/day.
+        Accepts: DICOM folder (drag &amp; drop only), or ZIP archive of a study
+        with sagittal + axial MR knee series. Max 500 MB / 1000 files.
+        Per-IP rate limit: 5/hour, 20/day.
       </p>
     </div>
     <div class="upload-progress" id="upload-progress">

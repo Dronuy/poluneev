@@ -166,8 +166,25 @@
       });
     });
 
-    zone.addEventListener("drop", function (e) {
-      const files = Array.from(e.dataTransfer.files || []);
+    zone.addEventListener("drop", async function (e) {
+      // Drop can carry plain Files (single ZIP, single .dcm) OR
+      // DataTransferItems with directory entries (folder drag-drop).
+      // Walk both paths to a uniform File[] before dispatching.
+      const dt = e.dataTransfer;
+      let files = [];
+      try {
+        if (dt && dt.items && dt.items.length) {
+          showProgress("Scanning folder…");
+          setProgressBar(0);
+          setProgressMeta("");
+          files = await collectFromDataTransferItems(dt.items);
+        } else {
+          files = Array.from(dt && dt.files || []);
+        }
+      } catch (err) {
+        showError(err && err.message ? err.message : "Could not read drop.");
+        return;
+      }
       if (files.length) handleUpload(files);
     });
     file.addEventListener("change", function () {
@@ -177,16 +194,112 @@
     });
   }
 
+  // ---- DataTransferItem walker ----------------------------------------
+  // Recursively walk webkit FileSystemEntry tree, collecting File objects
+  // tagged with a `webkitRelativePath`-equivalent so JSZip preserves the
+  // folder structure. Filters to .dcm + extensionless (raw DICOM) at
+  // collection time so we don't waste bandwidth zipping README.txt.
+  function collectFromDataTransferItems(itemList) {
+    const entries = [];
+    for (let i = 0; i < itemList.length; i++) {
+      const it = itemList[i];
+      const e = it && (it.webkitGetAsEntry ? it.webkitGetAsEntry() : null);
+      if (e) entries.push(e);
+      else if (it && it.kind === "file" && it.getAsFile) {
+        const f = it.getAsFile();
+        if (f) entries.push({ __file: f });
+      }
+    }
+    return walkEntries(entries);
+  }
+  async function walkEntries(entries) {
+    const out = [];
+    for (const entry of entries) {
+      if (entry.__file) {
+        out.push(entry.__file);
+        continue;
+      }
+      if (entry.isFile) {
+        const f = await new Promise(function (res, rej) {
+          entry.file(function (file) {
+            // Tag the path so the ZIP preserves folder structure even on
+            // browsers without webkitRelativePath on dropped files.
+            try {
+              Object.defineProperty(file, "webkitRelativePath", {
+                value: entry.fullPath ? entry.fullPath.replace(/^\//, "") : file.name,
+              });
+            } catch (_) { /* read-only on some browsers — JSZip will fall back to f.name */ }
+            res(file);
+          }, rej);
+        });
+        if (acceptDicomFile(f)) out.push(f);
+      } else if (entry.isDirectory) {
+        const children = await readAllEntries(entry.createReader());
+        const sub = await walkEntries(children);
+        out.push(...sub);
+      }
+    }
+    return out;
+  }
+  function readAllEntries(reader) {
+    // readEntries returns at most ~100 per call; loop until empty.
+    return new Promise(function (resolve, reject) {
+      const all = [];
+      function pull() {
+        reader.readEntries(function (batch) {
+          if (!batch.length) return resolve(all);
+          all.push(...batch);
+          pull();
+        }, reject);
+      }
+      pull();
+    });
+  }
+  function acceptDicomFile(f) {
+    if (!f) return false;
+    const n = (f.name || "").toLowerCase();
+    if (n.endsWith(".dcm") || n.endsWith(".dicom")) return true;
+    if (n === "dicomdir") return true;
+    // Single-file ZIP drop is allowed at the top.
+    if (n.endsWith(".zip")) return true;
+    // Extensionless files often ARE raw DICOM — accept if the upload
+    // looks like a folder drop (multiple files) rather than a stray
+    // single non-DICOM file. We can't read pixel headers cheaply
+    // client-side; let backend's magic-byte filter reject non-DICOM.
+    if (n.indexOf(".") < 0) return true;
+    return false;
+  }
+
   async function handleUpload(files) {
     hideUploadError();
     showProgress("Validating…");
     setProgressBar(0);
     setProgressMeta("Detected " + files.length + " file" + (files.length === 1 ? "" : "s"));
 
-    // Local size cap (500 MB) before we even build the ZIP
+    // Pre-flight: count, size, min file count
+    if (files.length === 0) {
+      showError("No DICOM files found in this folder.");
+      return;
+    }
+    if (files.length > 1000) {
+      showError("Folder contains too many files (" + files.length +
+                "; max 1000). Please upload a single MRI study.");
+      return;
+    }
+    // Single-file ZIP path bypasses the 8-file minimum (the ZIP itself
+    // probably contains a study).
+    const zipDrop = files.length === 1 && /\.zip$/i.test(files[0].name);
+    if (!zipDrop && files.length < 8) {
+      showError("Folder has " + files.length + " file" +
+                (files.length === 1 ? "" : "s") +
+                " but a DICOM series usually has 8+ slices. " +
+                "Please drop the full study folder.");
+      return;
+    }
     const totalBytes = files.reduce(function (s, f) { return s + f.size; }, 0);
     if (totalBytes > 500 * 1024 * 1024) {
-      showError("Upload exceeds 500 MB cap (" + Math.round(totalBytes / 1024 / 1024) + " MB).");
+      showError("Folder size exceeds 500 MB limit (" +
+                Math.round(totalBytes / 1024 / 1024) + " MB).");
       return;
     }
 
