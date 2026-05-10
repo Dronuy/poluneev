@@ -6,13 +6,21 @@
   background: linear-gradient(180deg, #FFFFFF 0%, #F0FDFA 100%);
   text-align: center;
 }
+.hero-tag {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--c-primary-dark);
+  letter-spacing: 0.04em;
+  text-transform: none;
+  margin-bottom: 14px;
+}
 .hero h1 {
   font-size: var(--fs-4xl);
   font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
   color: var(--c-text);
-  margin-bottom: 28px;
+  margin-bottom: 32px;
   max-width: 920px;
   margin-left: auto;
   margin-right: auto;
@@ -40,8 +48,9 @@
   justify-content: center;
 }
 
+/* Disclaimer — visually separated from CTA. */
 .hero-disclaimer {
-  margin-top: 28px;
+  margin-top: 3rem;
   font-size: var(--fs-xs);
   color: var(--c-text-mute);
   letter-spacing: 0.02em;
@@ -67,15 +76,17 @@
 }
 .section-head p { color: var(--c-text-soft); font-size: var(--fs-lg); }
 
-/* ---------- About ---------- */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
-  align-items: start;
+/* ---------- About (single-column stack) ---------- */
+.about-stack {
+  max-width: 760px;
+  margin: 0 auto;
 }
-.about p { font-size: var(--fs-lg); color: var(--c-text-soft); line-height: 1.7; }
-.about p + p { margin-top: 18px; }
+.about-stack p {
+  font-size: var(--fs-lg);
+  color: var(--c-text-soft);
+  line-height: 1.7;
+}
+.about-stack p + p { margin-top: 22px; }
 
 /* ---------- Capabilities ---------- */
 .cap-grid {
@@ -237,7 +248,6 @@
 @media (max-width: 768px) {
   .hero { padding: 80px 0 60px; }
   .section { padding: 60px 0; }
-  .about-grid { grid-template-columns: 1fr; gap: 28px; }
   .cap-grid { grid-template-columns: 1fr; }
   .founder-card {
     grid-template-columns: 1fr;
