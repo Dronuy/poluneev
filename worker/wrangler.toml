@@ -1,0 +1,25 @@
+name = "poluneev-subscribe"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+# After creating the SUBSCRIBERS KV namespace in the Cloudflare dashboard
+# (Phase B.6a), paste its ID below. `id` is used for production deploys,
+# `preview_id` for `wrangler dev`.
+[[kv_namespaces]]
+binding     = "SUBSCRIBERS"
+id          = "REPLACE_WITH_KV_NAMESPACE_ID"
+preview_id  = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+# Same KV namespace doubles as the in-process rate-limit store
+# (keys: rl:<ip-hash>:<bucket>, value: count, TTL = 1 hour).
+
+# Optional custom-domain route. Leave commented until DNS is wired
+# (CNAME subscribe.poluneev.com -> <worker>.workers.dev managed by CF).
+# [[routes]]
+# pattern  = "subscribe.poluneev.com/*"
+# zone_name = "poluneev.com"
+
+[vars]
+# ALLOWED_ORIGINS: comma-separated list. Update if staging/preview hostnames change.
+ALLOWED_ORIGINS = "https://poluneev.com,https://www.poluneev.com,https://staging.poluneev.com,https://poluneev.pages.dev"
+RATE_LIMIT_PER_HOUR = "3"

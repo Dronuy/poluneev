@@ -267,6 +267,34 @@
   </div>
 </section>
 
+<!-- ================ SUBSCRIBE ================ -->
+<section id="subscribe" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Stay informed</h2>
+      <p>Subscribe to receive updates on new modules and product launches.</p>
+    </div>
+    <form class="sub-form" id="sub-form" autocomplete="off" novalidate>
+      <input
+        class="sub-input"
+        type="email"
+        id="sub-email"
+        name="email"
+        placeholder="you@example.com"
+        required
+        aria-label="Email address">
+      <button class="btn btn-primary sub-btn" type="submit" id="sub-btn">
+        Subscribe
+      </button>
+    </form>
+    <div class="sub-status" id="sub-status" role="status" aria-live="polite"></div>
+    <p class="sub-privacy">
+      We only use your email to send product updates. No third parties.
+      Unsubscribe anytime by replying.
+    </p>
+  </div>
+</section>
+
 <!-- ================ CONTACT ================ -->
 <section id="contact" class="section section-soft contact">
   <div class="wrap">
@@ -314,5 +342,6 @@
 </footer>
 
 <script src="/assets/js/main.js"></script>
+<script src="/assets/js/subscribe.js"></script>
 </body>
 </html>

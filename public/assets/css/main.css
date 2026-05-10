@@ -416,6 +416,62 @@
   font-size: var(--fs-sm);
 }
 
+/* ---------- Subscribe form ---------- */
+.sub-form {
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.sub-input {
+  flex: 1 1 240px;
+  min-width: 0;
+  padding: 12px 16px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: var(--fs-base);
+  color: var(--c-text);
+  background: var(--c-bg);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.sub-input:focus {
+  outline: none;
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 3px rgba(13,148,136,0.15);
+}
+.sub-btn { padding: 12px 22px; flex-shrink: 0; }
+.sub-btn:disabled {
+  background: #9CA3AF;
+  cursor: not-allowed;
+}
+
+.sub-status {
+  max-width: 520px;
+  margin: 14px auto 0;
+  text-align: center;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  min-height: 22px;
+}
+.sub-status.is-success { color: var(--c-good); }
+.sub-status.is-error   { color: var(--c-bad); }
+
+.sub-privacy {
+  max-width: 520px;
+  margin: 16px auto 0;
+  text-align: center;
+  color: var(--c-text-mute);
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .sub-form { flex-direction: column; }
+  .sub-btn  { width: 100%; }
+}
+
 /* ---------- Contact ---------- */
 .contact {
   text-align: center;

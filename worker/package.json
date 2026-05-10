@@ -1,0 +1,17 @@
+{
+  "name": "poluneev-subscribe",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cloudflare Worker for the Poluneev subscribe form (KV-backed).",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "list-subs": "wrangler kv key list --binding=SUBSCRIBERS --prefix=sub:",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250101.0",
+    "wrangler": "^3.99.0"
+  }
+}
