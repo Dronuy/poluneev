@@ -1,0 +1,12 @@
+# Cloudflare Pages redirects file.
+# Format: <from>  <to>  <status_code>
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Pretty URLs without .html extension
+/demo            /demo.html         200
+/privacy         /privacy.html      200
+/terms           /terms.html        200
+
+# Drop the legacy github.io demo path if anything still hits it
+/pfi-engine      /demo              301
+/pfi-engine/*    /demo              301

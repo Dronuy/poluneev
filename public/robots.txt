@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assets/data/
+
+Sitemap: https://poluneev.com/sitemap.xml

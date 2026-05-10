@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy &mdash; Poluneev</title>
+<meta name="description" content="Poluneev privacy policy. How DICOM uploads, request logs, and contact information are handled.">
+<meta name="theme-color" content="#0D9488">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/shared.css">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="/"><strong>Poluneev</strong></a>
+    <button class="nav-burger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#capabilities">Capabilities</a></li>
+      <li><a href="/#founder">Founder</a></li>
+      <li><a href="/#contact">Contact</a></li>
+      <li><a class="btn btn-primary" href="/demo">Live Demo &rarr;</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="wrap doc">
+  <h1>Privacy Policy</h1>
+  <p class="meta">Effective: 2026-05-10 &middot; Chicago, IL, USA</p>
+
+  <p>
+    Poluneev (&ldquo;we,&rdquo; &ldquo;our&rdquo;) operates poluneev.com and
+    its associated demo. This page explains what data we receive, how we
+    handle it, and how to reach us with questions.
+  </p>
+
+  <h2>1. Research-only context</h2>
+  <p>
+    Poluneev is a research preview, not a medical device. Outputs are
+    informational and must be reviewed by a board-certified radiologist
+    before any clinical use. By uploading a study you confirm that you
+    accept this and that you have authority to share the data.
+  </p>
+
+  <h2>2. DICOM uploads</h2>
+  <p>
+    When you upload a study to the live demo at
+    <a href="/demo">poluneev.com/demo</a>:
+  </p>
+  <ul>
+    <li>
+      The archive is transmitted over TLS to our backend.
+    </li>
+    <li>
+      The backend strips standard DICOM PHI tags (patient name, ID, birth
+      date, accession number, institution, referring physician, etc.) into
+      a temporary scrubbed copy before inference. The original upload is
+      deleted within seconds of receipt.
+    </li>
+    <li>
+      Inference runs on the scrubbed copy. The scrubbed copy and any
+      intermediate artefacts are deleted from temporary storage within
+      <strong>5 minutes</strong> of the request completing.
+    </li>
+    <li>
+      We do <strong>not</strong> persist your DICOMs, derived images, or
+      analysis results past the request lifecycle. We do <strong>not</strong>
+      use uploaded data for model training.
+    </li>
+  </ul>
+
+  <h2>3. Request logs</h2>
+  <p>
+    We log per-request metadata for operational and abuse-prevention
+    purposes only:
+  </p>
+  <ul>
+    <li>Request timestamps</li>
+    <li>SHA-256 hash prefix of your IP address (not the raw IP)</li>
+    <li>Endpoint, response status code, processing duration, upload size</li>
+    <li>A randomly-generated request ID</li>
+  </ul>
+  <p>
+    We do <strong>not</strong> log DICOM contents, original filenames, or
+    any patient identifiers. Logs rotate; retention is at most 7 days.
+  </p>
+
+  <h2>4. Cookies</h2>
+  <p>
+    Poluneev uses <strong>no</strong> tracking cookies, no third-party
+    analytics, and no advertising tags. The site is statically served by
+    Cloudflare Pages; Cloudflare may set a short-lived security cookie
+    (per Cloudflare&rsquo;s policy) for bot protection. We do not read or
+    correlate it.
+  </p>
+
+  <h2>5. Email contact</h2>
+  <p>
+    If you email <a href="mailto:contact@poluneev.com">contact@poluneev.com</a>
+    we receive your address, message, and any attachments. We use this to
+    reply. We don&rsquo;t add you to any mailing list. Delete requests
+    honored on receipt.
+  </p>
+
+  <h2>6. Third parties</h2>
+  <p>
+    The site is hosted by Cloudflare (Pages + Tunnel). The inference
+    backend runs on Andrei Poluneev&rsquo;s development workstation. No
+    other processors receive your data.
+  </p>
+
+  <h2>7. Changes</h2>
+  <p>
+    We may update this policy as the product evolves; the effective date
+    above will reflect the most recent change. Material changes will be
+    announced on the landing page.
+  </p>
+
+  <p style="margin-top:32px;">
+    Questions? <a href="mailto:contact@poluneev.com">contact@poluneev.com</a>
+  </p>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <p><strong>Poluneev</strong></p>
+        <p>AI radiology &mdash; preliminary reads, signed by you.</p>
+        <p>Chicago, IL, USA</p>
+        <p>&copy; 2026 Poluneev. Research use only. Not a medical device.</p>
+      </div>
+      <div>
+        <p><strong>Product</strong></p>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/demo">Live Demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <p><strong>Legal</strong></p>
+        <ul>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="mailto:contact@poluneev.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

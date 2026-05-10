@@ -1,0 +1,22 @@
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Build / runtime artefacts (we deploy public/ as static)
+node_modules/
+dist/
+.cache/
+
+# Logs / scratch
+*.log
+*.tmp
+*.bak
+.env
+.env.*
+
+# Local dev servers
+.python-cache/
+__pycache__/

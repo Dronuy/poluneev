@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poluneev — AI radiology, preliminary reads signed by you</title>
+<meta name="description" content="Poluneev builds AI radiologists that draft preliminary reads at general-rad level, ready for board-certified review. The first available module is the PFI Engine — fully automated knee MRI analysis, 14 indices.">
+<meta name="theme-color" content="#0D9488">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Poluneev — AI radiology, preliminary reads signed by you">
+<meta property="og:description" content="Fully automated knee MRI analysis. 14 quantitative patellofemoral instability indices, structured clinical output.">
+<meta property="og:url" content="https://poluneev.com/">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/shared.css">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+<!-- ================ NAV ================ -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="/"><strong>Poluneev</strong></a>
+    <button class="nav-burger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#capabilities">Capabilities</a></li>
+      <li><a href="#founder">Founder</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a class="btn btn-primary" href="/demo">Live Demo &rarr;</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ================ HERO ================ -->
+<section class="hero">
+  <div class="wrap">
+    <h1>AI radiology — <span class="accent">preliminary reads, signed by you</span>.</h1>
+    <p class="first-line">
+      Poluneev builds AI radiologists that draft reads at the level of a
+      general radiologist &mdash; automated measurements, structured findings,
+      literature-anchored verdicts &mdash; ready for a board-certified review
+      and signature.
+    </p>
+    <p>
+      The first available module is the <strong>PFI Engine</strong>, a fully
+      automated knee MRI analysis producing 14 quantitative patellofemoral
+      instability indices and structured clinical output.
+    </p>
+    <div class="cta">
+      <a class="btn btn-primary" href="/demo">Try Live Demo &rarr;</a>
+      <a class="btn btn-ghost" href="#about">Learn more</a>
+    </div>
+    <p class="hero-disclaimer">
+      Research preview. Not a medical device. Not for clinical diagnosis.
+    </p>
+  </div>
+</section>
+
+<!-- ================ ABOUT ================ -->
+<section id="about" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What we do</h2>
+      <p>One radiologist's read &mdash; drafted by AI, signed by a human.</p>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>
+          A modern MSK radiology read is a chain of repeatable measurements
+          and a paragraph of clinical interpretation. The repeatable
+          measurements take minutes; the paragraph is the part that benefits
+          from a human.
+        </p>
+        <p>
+          Poluneev automates the measurements end-to-end and emits a
+          structured, literature-anchored output. The radiologist stays in
+          the loop where it matters &mdash; the wording, the caveats, the
+          signature.
+        </p>
+      </div>
+      <div>
+        <p>
+          Every threshold, every cutoff, every category in our output is tied
+          to a published reference. Indices are computed deterministically
+          from DICOM voxels; no scores are ever produced without a clear
+          numeric chain back to the source measurement.
+        </p>
+        <p>
+          The first module &mdash; the PFI Engine &mdash; closes the loop on
+          patellofemoral instability MRI: 14 indices across 4 clinical
+          domains, validated on 530 fastMRI knee studies, ready for review.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ CAPABILITIES ================ -->
+<section id="capabilities" class="section section-soft">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What the PFI Engine does</h2>
+      <p>
+        Drop a DICOM study. Get a clinical-ready report in seconds.
+      </p>
+    </div>
+    <div class="cap-grid">
+      <div class="cap">
+        <div class="ic">&#9889;</div>
+        <h3>Fully automated</h3>
+        <p>
+          From DICOM upload to clinical output in seconds. No manual
+          landmarking, no slice picking, no measurement loop. The pipeline
+          handles series identification, slice selection, landmark detection,
+          and threshold application end-to-end.
+        </p>
+      </div>
+      <div class="cap">
+        <div class="ic">&#9783;</div>
+        <h3>Multi-domain</h3>
+        <p>
+          14 quantitative indices across 4 clinical domains:
+          <strong>patellar height</strong> (IS, CDI, PTI),
+          <strong>trochlear morphology</strong> (3 cartilage + 4 bone indices),
+          <strong>lateralization</strong> (PT-TG cart), and
+          <strong>patellar tilt</strong>.
+        </p>
+      </div>
+      <div class="cap">
+        <div class="ic">&#128218;</div>
+        <h3>Literature-based</h3>
+        <p>
+          Every threshold from a peer-reviewed reference: Insall 1971,
+          Caton 1982, Biedert 2006, Tanaka 2023, Pfirrmann 2000, Carrillon
+          2000, Sallay 1996, Hinckel 2017. No black-box scores.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ FOUNDER ================ -->
+<section id="founder" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Founder</h2>
+    </div>
+    <div class="founder-card">
+      <div class="founder-photo" aria-hidden="true">AP</div>
+      <div class="founder-body">
+        <h3>Andrei Poluneev</h3>
+        <div class="title">Diagnostic Radiologist &middot; Founder, Poluneev</div>
+        <p>
+          Andrei is a diagnostic radiologist focused on musculoskeletal MRI.
+          He designs the clinical pipelines, annotation conventions, and
+          validation workflows behind every Poluneev module &mdash; and reads
+          every output that ships.
+        </p>
+        <p>
+          The PFI Engine is the first product of that approach: every index
+          ties back to a published threshold, every category back to a
+          reproducible measurement, every output through a human signature.
+        </p>
+        <a class="founder-link" href="https://www.linkedin.com/in/andrei-poluneev-57058a258/" target="_blank" rel="noopener">
+          LinkedIn &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ CONTACT ================ -->
+<section id="contact" class="section section-soft contact">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Get in touch</h2>
+      <p>For research collaborations, technical questions, or press:</p>
+    </div>
+    <a class="contact-mail" href="mailto:contact@poluneev.com">contact@poluneev.com</a>
+    <p class="contact-loc">Chicago, IL, USA</p>
+  </div>
+</section>
+
+<!-- ================ FOOTER ================ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <p><strong>Poluneev</strong></p>
+        <p>AI radiology &mdash; preliminary reads, signed by you.</p>
+        <p>Chicago, IL, USA</p>
+        <p>&copy; 2026 Poluneev. Research use only. Not a medical device.</p>
+      </div>
+      <div>
+        <p><strong>Product</strong></p>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/demo">Live Demo</a></li>
+          <li><a href="#capabilities">PFI Engine</a></li>
+        </ul>
+      </div>
+      <div>
+        <p><strong>Legal</strong></p>
+        <ul>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="mailto:contact@poluneev.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      Findings produced by Poluneev tools do not replace clinical judgement.
+      Always read by a board-certified radiologist before signing.
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
