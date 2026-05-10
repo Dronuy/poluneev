@@ -88,6 +88,11 @@
     document.getElementById("ax-svg").innerHTML  = "";
     document.getElementById("ax-jumps").innerHTML = "";
 
+    // Un-hide the slice scrubbers in case the previous view was a live
+    // upload (renderLiveResult hides them).
+    document.querySelectorAll("#sag-panel .viewer-scrubber, #ax-panel .viewer-scrubber")
+      .forEach(function (el) { el.style.display = ""; });
+
     if (!window.caseData[name]) await loadCase(name);
     if (myToken !== _selectionToken) return;   // a newer click superseded us
 
@@ -375,38 +380,121 @@
 
   function renderLiveResult(liveResult) {
     // Build a synthetic "case" so we reuse the same viewer + result panel
-    // path the sample cases use. Live uploads have no slice PNGs in v1, so
-    // the viewer canvas falls back to no image and the user sees the
-    // result panel only.
+    // path the sample cases use. Live uploads ship 4 measurement slice
+    // PNGs (Phase 4-Slices.backend) but no scrollable series; we fan them
+    // out so SAG has 1 slice + AX has 3 (LTI / Meas / PCL) reachable via
+    // the existing AX jump buttons.
     const adapted = window.PoluneevOverlays.adaptLiveResult(liveResult);
+    const slicesB64 = liveResult.measurement_slices_b64 || {};
+
+    function dataUrl(b64) {
+      return b64 ? ("data:image/png;base64," + b64) : "";
+    }
+    function makeImg(src) {
+      const img = new Image();
+      if (src) img.src = src;
+      return img;
+    }
+
+    // SAG: single slot with the measurement slice (or empty placeholder).
+    const sagSlices = [ makeImg(dataUrl(slicesB64.sag_measurement)) ];
+
+    // AX: three slots in display order [LTI, Meas, PCL]. Empty slots
+    // become blank placeholders; the jump buttons below filter to slots
+    // that actually have a slice.
+    const axOrder = [
+      { key: "lti",  label: "LTI",  src: dataUrl(slicesB64.ax_lti)  },
+      { key: "meas", label: "Meas", src: dataUrl(slicesB64.ax_meas) },
+      { key: "pcl",  label: "PCL",  src: dataUrl(slicesB64.ax_pcl)  },
+    ];
+    const axSlices = axOrder.map(function (e) { return makeImg(e.src); });
+    const defaultAxIdx = (function () {
+      // Prefer Meas (most informative), then LTI, then PCL, then 0.
+      for (const want of ["meas", "lti", "pcl"]) {
+        const i = axOrder.findIndex(function (e) { return e.key === want && e.src; });
+        if (i >= 0) return i;
+      }
+      return 0;
+    })();
+
     window.caseData["__live_upload"] = {
-      meta: { sag: { n_slices: 1 }, ax: { n_slices: 1 } },
+      meta: {
+        sag: { n_slices: sagSlices.length },
+        ax:  { n_slices: axSlices.length  },
+      },
       overlays: adapted,
-      sagSlices: [new Image()],
-      axSlices: [new Image()],
+      sagSlices: sagSlices,
+      axSlices: axSlices,
+      // Mark this case so viewer.js / scrub handlers can switch to
+      // single-slice / fixed-views mode.
+      _liveUpload: true,
+      _axOrder: axOrder,
     };
     window.currentCase = "__live_upload";
-    window.analyzed = true;
+    window.analyzed = false;   // we don't render landmark overlays for live uploads (Phase 5)
+    window.activeAxJump = null;
     document.querySelectorAll(".case-card").forEach(function (c) { c.classList.remove("active"); });
-    document.getElementById("sag-img").src = "";
-    document.getElementById("ax-img").src = "";
+
+    // Clear stale overlays + reset counters/markers.
     document.getElementById("sag-svg").innerHTML = "";
     document.getElementById("ax-svg").innerHTML  = "";
-    document.getElementById("ax-jumps").innerHTML = "";
     document.getElementById("sag-best-marker").textContent = "";
     document.getElementById("ax-best-marker").textContent  = "";
-    document.getElementById("sag-counter").textContent = "—";
-    document.getElementById("ax-counter").textContent  = "—";
-    document.getElementById("sag-idx").textContent = "live upload";
-    document.getElementById("ax-idx").textContent  = "live upload";
+
+    // Hide the slice scrubbers (they'd show "1 / 1" with nothing to scrub
+    // through). Re-shown next time the user clicks a sample case.
+    document.querySelectorAll("#sag-panel .viewer-scrubber, #ax-panel .viewer-scrubber")
+      .forEach(function (el) { el.style.display = "none"; });
+
+    // Set SAG image + label.
+    document.getElementById("sag-range").max = sagSlices.length;
+    document.getElementById("sag-range").value = 1;
+    document.getElementById("sag-img").src = sagSlices[0].src || "";
+    document.getElementById("sag-counter").textContent = "Measurement slice";
+
+    // Build AX jump buttons — only for slots that actually have a slice.
+    const jumpsBar = document.getElementById("ax-jumps");
+    jumpsBar.innerHTML = "";
+    axOrder.forEach(function (entry, i) {
+      if (!entry.src) return;
+      const b = document.createElement("button");
+      b.textContent = entry.label;
+      b.dataset.liveAxIdx = String(i);
+      b.onclick = function () { setLiveAxSlice(i); };
+      jumpsBar.appendChild(b);
+    });
+    setLiveAxSlice(defaultAxIdx);
 
     const btn = document.getElementById("analyze-btn");
     btn.disabled = true;
     btn.textContent = "Live result rendered ↓";
     btn.classList.add("analyzed");
 
+    // Disclaimer banner above results
+    const r = document.getElementById("results");
+    const banner =
+      '<div class="banner banner-info" style="margin-bottom:14px;">' +
+      '<strong>Live upload.</strong> Single measurement slice per panel — ' +
+      'the slices the AI used to compute the indices below. ' +
+      'Sample cases include full series for browsing.' +
+      '</div>';
     window.PoluneevOverlays.showResults(adapted);
-    document.getElementById("results").scrollIntoView({ behavior: "smooth", block: "start" });
+    r.insertAdjacentHTML("afterbegin", banner);
+    r.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function setLiveAxSlice(i) {
+    const data = window.caseData["__live_upload"];
+    if (!data || !data._liveUpload) return;
+    const img = data.axSlices[i];
+    if (!img || !img.src) return;
+    document.getElementById("ax-img").src = img.src;
+    document.getElementById("ax-svg").innerHTML = "";
+    const label = (data._axOrder[i] && data._axOrder[i].label) || "";
+    document.getElementById("ax-counter").textContent = label ? (label + " slice") : "—";
+    document.querySelectorAll("#ax-jumps button").forEach(function (b) {
+      b.classList.toggle("active", parseInt(b.dataset.liveAxIdx, 10) === i);
+    });
   }
 
   // --- progress / error UI helpers ---
