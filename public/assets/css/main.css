@@ -378,43 +378,86 @@
   border-radius: 12px;
   padding: 40px;
   display: grid;
-  grid-template-columns: 160px 1fr;
+  grid-template-columns: 200px 1fr;
   gap: 36px;
-  align-items: start;
+  align-items: center;
   box-shadow: var(--shadow-sm);
+  max-width: 880px;
+  margin: 0 auto;
 }
 .founder-photo {
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   background: linear-gradient(135deg, #CCFBF1 0%, #5EEAD4 100%);
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
+}
+.founder-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+.founder-initials {
+  z-index: 1;
+  font-size: 60px;
   font-weight: 700;
   color: var(--c-primary-dark);
+  letter-spacing: 0.02em;
 }
-.founder-body h3 { font-size: var(--fs-xl); font-weight: 700; margin-bottom: 4px; }
+.founder-body h3 { font-size: var(--fs-2xl); font-weight: 700; margin-bottom: 4px; letter-spacing: -0.01em; }
 .founder-body .title {
   color: var(--c-primary);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-base);
   font-weight: 500;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   letter-spacing: 0.01em;
 }
 .founder-body p {
   color: var(--c-text-soft);
   line-height: 1.65;
-  margin-bottom: 14px;
+  margin-bottom: 22px;
 }
+
+/* LinkedIn button — full pill, white-on-teal, icon + arrow */
 .founder-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-weight: 500;
-  font-size: var(--fs-sm);
+  gap: 12px;
+  background: var(--c-primary);
+  color: #FFFFFF;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: var(--fs-base);
+  text-decoration: none;
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(13,148,136,0.15);
 }
+.founder-link:hover {
+  background: var(--c-primary-dark);
+  color: #FFFFFF;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(13,148,136,0.25);
+}
+.founder-link .li-ic {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.founder-link .li-arrow {
+  font-size: 18px;
+  margin-left: 2px;
+  transition: transform 0.15s;
+}
+.founder-link:hover .li-arrow { transform: translateX(2px); }
 
 /* ---------- Subscribe form ---------- */
 .sub-form {
@@ -552,9 +595,17 @@
   .founder-card {
     grid-template-columns: 1fr;
     text-align: center;
-    padding: 28px;
+    padding: 28px 24px;
     gap: 22px;
   }
-  .founder-photo { margin: 0 auto; }
+  .founder-photo { margin: 0 auto; width: 160px; height: 160px; }
+  .founder-initials { font-size: 48px; }
+  .founder-body h3 { font-size: var(--fs-xl); }
+  .founder-link {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+  }
   .contact-mail { font-size: var(--fs-xl); word-break: break-word; }
 }
