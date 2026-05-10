@@ -61,12 +61,23 @@
     <div class="upload-zone" id="upload-zone" tabindex="0" role="button" aria-label="Upload DICOM study">
       <div class="ic">&uarr;</div>
       <h3>Upload your own DICOM study</h3>
-      <p>Drop a DICOM <strong>folder</strong> or a <strong>ZIP</strong> file here, or click to browse.</p>
-      <a class="btn btn-primary" id="upload-pick">Choose ZIP</a>
-      <input type="file" id="upload-file" accept=".zip,application/zip">
+      <p>Drop a DICOM <strong>folder</strong> or a <strong>ZIP</strong> file here, or pick one below.</p>
+
+      <div class="upload-pickers">
+        <a class="btn btn-primary"  id="upload-pick-folder">Choose folder</a>
+        <a class="btn btn-ghost"    id="upload-pick-zip">Choose ZIP</a>
+      </div>
+      <p class="upload-or">or drag &amp; drop above</p>
+
+      <!-- Folder picker: webkitdirectory tells the browser to open a folder selector.
+           This produces a flat File[] with each File's webkitRelativePath set so
+           our existing JSZip step can preserve folder structure. -->
+      <input type="file" id="upload-folder" webkitdirectory directory multiple hidden>
+      <input type="file" id="upload-file"   accept=".zip,application/zip" hidden>
+
       <p class="accepts">
-        Accepts: DICOM folder (drag &amp; drop only), or ZIP archive of a study
-        with sagittal + axial MR knee series. Max 500 MB / 1000 files.
+        Accepts: DICOM folder (browser will pick a directory) or ZIP archive
+        of a study with sagittal + axial MR knee series. Max 500 MB / 1000 files.
         Per-IP rate limit: 5/hour, 20/day.
       </p>
     </div>

@@ -21,6 +21,11 @@
   window.activeAxJump = null;
 
   // ----------------------- Sample cases -----------------------
+  // Monotonic counter — incremented on each selectCase() call. The async
+  // body re-checks the token before mutating the viewer, so a slow-loading
+  // case can't stomp a faster newer click (rapid-click race).
+  let _selectionToken = 0;
+
   function init() {
     const casesDiv = document.getElementById("cases");
     CASES.forEach(function (c) {
@@ -59,6 +64,8 @@
   }
 
   async function selectCase(name) {
+    const myToken = ++_selectionToken;
+
     window.currentCase = name;
     window.analyzed = false;
     window.activeAxJump = null;
@@ -73,9 +80,18 @@
     btn.textContent = "ANALYZE";
     btn.disabled = true;
 
-    if (!window.caseData[name]) await loadCase(name);
-    const data = window.caseData[name];
+    // Eagerly clear stale slice img + overlay so the wrong-case-flash
+    // window is small even if loadCase awaits a slow network.
+    document.getElementById("sag-img").removeAttribute("src");
+    document.getElementById("ax-img").removeAttribute("src");
+    document.getElementById("sag-svg").innerHTML = "";
+    document.getElementById("ax-svg").innerHTML  = "";
+    document.getElementById("ax-jumps").innerHTML = "";
 
+    if (!window.caseData[name]) await loadCase(name);
+    if (myToken !== _selectionToken) return;   // a newer click superseded us
+
+    const data = window.caseData[name];
     window.sagSliceIdx = (data.overlays && data.overlays.sag && data.overlays.sag.best_slice_idx_0based) || 0;
     window.axSliceIdx  = (data.overlays && data.overlays.ax && data.overlays.ax.predicted_slices_0based && data.overlays.ax.predicted_slices_0based.meas) || 0;
     if (window.sagSliceIdx >= data.meta.sag.n_slices) window.sagSliceIdx = Math.floor(data.meta.sag.n_slices / 2);
@@ -143,14 +159,28 @@
   let uploadAbort = null;
 
   function initUpload() {
-    const zone   = document.getElementById("upload-zone");
-    const file   = document.getElementById("upload-file");
-    const pick   = document.getElementById("upload-pick");
+    const zone       = document.getElementById("upload-zone");
+    const fileZip    = document.getElementById("upload-file");      // ZIP picker
+    const fileFolder = document.getElementById("upload-folder");    // webkitdirectory
+    const pickZip    = document.getElementById("upload-pick-zip");
+    const pickFolder = document.getElementById("upload-pick-folder");
 
-    zone.addEventListener("click",   function () { file.click(); });
-    pick.addEventListener("click",   function (e) { e.stopPropagation(); file.click(); });
+    // Background click on the zone (not on a button) opens the folder picker
+    // by default — folder upload is the most common use case.
+    zone.addEventListener("click", function (e) {
+      if (e.target.closest && e.target.closest(".upload-pickers")) return;
+      fileFolder.click();
+    });
+    pickFolder.addEventListener("click", function (e) {
+      e.stopPropagation();
+      fileFolder.click();
+    });
+    pickZip.addEventListener("click", function (e) {
+      e.stopPropagation();
+      fileZip.click();
+    });
     zone.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); file.click(); }
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fileFolder.click(); }
     });
 
     ["dragenter", "dragover"].forEach(function (ev) {
@@ -187,11 +217,15 @@
       }
       if (files.length) handleUpload(files);
     });
-    file.addEventListener("change", function () {
-      const files = Array.from(file.files || []);
-      if (files.length) handleUpload(files);
-      file.value = "";  // allow re-upload of same file
-    });
+    function onPickerChange(input) {
+      return function () {
+        const files = Array.from(input.files || []);
+        if (files.length) handleUpload(files);
+        input.value = "";   // allow re-upload of same selection
+      };
+    }
+    fileZip.addEventListener("change",    onPickerChange(fileZip));
+    fileFolder.addEventListener("change", onPickerChange(fileFolder));
   }
 
   // ---- DataTransferItem walker ----------------------------------------
