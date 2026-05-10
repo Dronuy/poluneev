@@ -1,7 +1,7 @@
 {
   "name": "Poluneev",
   "short_name": "Poluneev",
-  "description": "AI radiology — preliminary reads, signed by you.",
+  "description": "AI radiology - preliminary reads, signed by you.",
   "icons": [
     {
       "src": "/assets/icons/favicon-192.png",

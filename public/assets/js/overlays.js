@@ -41,7 +41,7 @@
       '</div>' +
       '<div class="right">' +
         '<span class="value">' + fmt(value, dec) + (unit || "") + '</span>' +
-        '<span class="verdict ' + verdictCls(verdict) + '">' + (verdict || "—") + '</span>' +
+        '<span class="verdict ' + verdictCls(verdict) + '">' + (verdict || "-") + '</span>' +
       '</div>' +
     '</div>';
   }
@@ -69,7 +69,7 @@
       (sagInd.CDI && (sagInd.CDI.category === "Alta" || sagInd.CDI.category === "Baja")) ||
       (sagInd.PTI && (sagInd.PTI.category === "Alta" || sagInd.PTI.category === "Baja"));
     const phVerdict = phPositive ? ["alta/baja", "v-abnormal"] : ["Normal", "v-normal"];
-    html += panelHtml("A — Patellar Height", phVerdict[0], phVerdict[1], [
+    html += panelHtml("A - Patellar Height", phVerdict[0], phVerdict[1], [
       idxRow("Insall-Salvati (IS)", sagInd.IS && sagInd.IS.value, "", sagInd.IS && sagInd.IS.category, "Insall 1971 / Miller 1996 / Shabshin 2004"),
       idxRow("Caton-Deschamps (CDI)", sagInd.CDI && sagInd.CDI.value, "", sagInd.CDI && sagInd.CDI.category, "Caton 1982"),
       idxRow("Patellotrochlear (PTI)", sagInd.PTI && sagInd.PTI.value, "", sagInd.PTI && sagInd.PTI.category, "Biedert 2006"),
@@ -86,7 +86,7 @@
       n === 1 ? ["Low grade",     "v-borderline"] :
       n <= 3  ? ["Moderate",      "v-borderline"] :
                 ["High grade",    "v-abnormal"];
-    html += panelHtml("B — Trochlear Morphology", grade[0], grade[1], [
+    html += panelHtml("B - Trochlear Morphology", grade[0], grade[1], [
       '<div style="font-size:10px;color:var(--d-text2);margin:6px 0 4px;font-weight:600;">Cart screening (Tanaka 2023)</div>',
       idxRow("Cart Sulcus Angle",         axInd.Cart_SA  && axInd.Cart_SA.value,  "°",     axInd.Cart_SA  && axInd.Cart_SA.verdict,  axInd.Cart_SA  && axInd.Cart_SA.reference),
       idxRow("Cart LTI",                  axInd.Cart_LTI && axInd.Cart_LTI.value, "°",     axInd.Cart_LTI && axInd.Cart_LTI.verdict, axInd.Cart_LTI && axInd.Cart_LTI.reference),
@@ -100,13 +100,13 @@
 
     // Domain C — Lateralization
     const lat = axInd.PT_TG_cart;
-    html += panelHtml("C — Lateralization", (lat && lat.verdict) || "Normal", verdictCls(lat && lat.verdict), [
+    html += panelHtml("C - Lateralization", (lat && lat.verdict) || "Normal", verdictCls(lat && lat.verdict), [
       idxRow("Patellar Tendon - Trochlear Groove", lat && lat.value, " mm", lat && lat.verdict, "Hinckel 2015"),
     ]);
 
     // Domain D — Patellar Tilt
     const tilt = axInd.Patellar_Tilt;
-    html += panelHtml("D — Patellar Tilt", (tilt && tilt.verdict) || "Normal", verdictCls(tilt && tilt.verdict), [
+    html += panelHtml("D - Patellar Tilt", (tilt && tilt.verdict) || "Normal", verdictCls(tilt && tilt.verdict), [
       idxRow("Patellar Tilt", tilt && tilt.value, "°", tilt && tilt.verdict, "Sallay 1996"),
     ]);
 
@@ -123,7 +123,7 @@
     if (intern.Cart_TFA || intern.sPT_TG_cart) {
       html += '<div class="internal-section">' +
         '<h3>Internal verification (supplementary)</h3>' +
-        '<div class="label">Computed for internal consistency only — not primary screening output.</div>';
+        '<div class="label">Computed for internal consistency only - not primary screening output.</div>';
       if (intern.Cart_TFA && intern.Cart_TFA.value != null) {
         html += '<div class="internal-row"><span class="iname">Cart-TFA (cart-bone consistency check)</span>' +
                 '<span class="ival">' + fmt(intern.Cart_TFA.value, 3) + '</span></div>';

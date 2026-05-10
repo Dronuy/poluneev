@@ -126,7 +126,7 @@
     return "#F44336";
   }
   function fmt(v, dec) {
-    if (v === null || v === undefined) return "—";
+    if (v === null || v === undefined) return "-";
     return typeof v === "number" ? v.toFixed(dec == null ? 2 : dec) : String(v);
   }
 
@@ -140,7 +140,7 @@
     const onBest = window.sagSliceIdx === sag.best_slice_idx_0based;
     if (!onBest) {
       svg.appendChild(textEl(20, 30,
-        "IS / CDI / PTI computed at best slice — scroll to highlighted slice",
+        "IS / CDI / PTI computed at best slice - scroll to highlighted slice",
         "#FFD700", 12));
       return;
     }

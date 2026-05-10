@@ -475,7 +475,7 @@
     const banner =
       '<div class="banner banner-info" style="margin-bottom:14px;">' +
       '<strong>Live upload.</strong> Measurement slices with AI annotations ' +
-      'shown — each panel shows the slice the AI used and the landmarks it ' +
+      'shown - each panel shows the slice the AI used and the landmarks it ' +
       'placed to compute the indices below. Sample cases include full ' +
       'series for browsing.' +
       '</div>';
@@ -492,7 +492,7 @@
     document.getElementById("ax-img").src = img.src;
     document.getElementById("ax-svg").innerHTML = "";
     const label = (data._axOrder[i] && data._axOrder[i].label) || "";
-    document.getElementById("ax-counter").textContent = label ? (label + " slice") : "—";
+    document.getElementById("ax-counter").textContent = label ? (label + " slice") : "-";
     document.querySelectorAll("#ax-jumps button").forEach(function (b) {
       b.classList.toggle("active", parseInt(b.dataset.liveAxIdx, 10) === i);
     });
